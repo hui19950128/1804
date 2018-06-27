@@ -1,0 +1,323 @@
+在线考试交卷答题剩余时间0小时00分00秒
+1.
+(单选题)下列对于IP地址的作用和配置方法，描述正确的是( B)
+ A.在一个局域网中IP地址可以重复
+ B.IP地址可以唯一标识一台主机
+ C.IP地址只能手工配置
+ D.IP地址只要配置DHCP自动获取，即可成功获取IP地址
+2.
+(单选题)以下(B )为C类地址默认的子网掩码
+ A.225.225.225.0
+ B.255.255.255.0
+ C.255.255.0.0
+ D.255.0.0.0
+3.
+(单选题)在Linux系统中，用户zhangsan属于student组，使用ls -l命令查看文件abc的属性如下所示， 
+[root@server ~]#ls -l abc 
+-rw-r--r-- 1 kenthy student 14 May 11 14:26 abc 
+则zhangsan对abc文件具有（C ）权限
+ A.可读可写
+ B.可读可执行
+ C.只读
+ D.可读可写可执行
+4.
+(单选题)在Linux系统中，要查看系统默认运行模式，可以使用（ A）命令
+ A.systemctl get-default
+ B.systemctl status
+ C.systemctl set-default
+ D.systemctl isolate
+5.
+(单选题)MBR分区最大支持多少个主分区( D)
+ A.3个
+ B.128个
+ C.64个
+ D.4个
+6.
+(单选题)在Linux中安装Mariadb数据库需要安装那些安装包( A)
+ A.mariadb-server
+ B.mariadb
+ C.mysql
+ D.mysql-server
+7.
+(单选题)在Linux系统中，以下（A ）命令可查找/boot目录下的快捷方式文件
+ A.find /boot –type l
+ B.find /boot –type f
+ C.find /boot –name l
+ D.find /boot –name f
+8.
+(单选题)在vim编辑器的（ B）模式中可以实现录入、退格等编辑操作
+ A.退出模式
+ B.输入模式
+ C.命令模式
+ D.末行模式
+9.
+(单选题)在Linux系统中，执行命令 ls -l test.sh 后，返回结果如下： 
+-rw-rw-r-- 1 zhang root 55 2014-02-21 test.sh，若希望
+文件所有者能够运行此脚本程序，可执行（ D）命令
+ A.chown root test.sh
+ B.chmod g+x test.sh
+ C.chmod ug+w test.sh
+ D.chmod u+x test.sh
+10.
+(单选题)对于IP地址的分类，C类IP地址的范围（ C）
+ A.190至223
+ B.191至223
+ C.192至223
+ D.192至224
+11.
+(单选题)在~/.bashrc中添加alias qstat='/bin/ps -Ao pid,tt,user,fname,
+rsz' ，能使用qstat 命令的用户是（D）
+ A.root用户
+ B.student用户
+ C.所有用户
+ D.仅当前用户
+12.
+(单选题)如何彻底禁用selinux（ A）
+ A.修改/etc/selinux/config文件中后重启服务器
+ B.修改/etc/selinux/config文件中后重启服务
+ C.使用setenforce 1命令禁用
+ D.使用setenforce 0命令禁用
+13.
+(单选题)配置NFS共享服务的配置文件为（ A）
+ A./etc/exports
+ B./etc/resolv.conf
+ C./etc/fstab
+ D./etc/nfs.conf
+14.
+(单选题)列出网上NFS共享资源的命令为（B ）
+ A.showmount 服务器地址
+ B.showmount -e 服务器地址
+ C.mount -e 服务器地址
+ D.mount 服务器地址
+15.
+(单选题)使用tar命令打包文档时如果包的结尾是.tar.xz那么打包时用（D）选项
+ A.-zcf
+ B.-jcf
+ C.-Pzcf
+ D.-Jcf
+16.
+(单选题)在Linux系统中，使用lvextend命令为指定的逻辑卷动态扩容以后，
+通过df命令查看时该分区显示的大小并未变化，还需要进行（ B）操作
+以便系统能够更新ext4文件系统大小。
+ A.partprobe
+ B.resize2fs
+ C.lvscan
+ D.mount
+17.
+(单选题)SSH远程登录服务使用的默认端口是（A ）
+ A.22
+ B.80
+ C.23
+ D.69
+18.
+(单选题)执行命令chmod -R ug=rw /tmp/test/ ，其结果是（A ）
+ A.将/tmp/test文件夹的属主和属组权限设置成读取和写入的权限
+ B.将/tmp/test文件夹的属主和其他人权限设置成读取和写入的权限
+ C.所有人一定可以访问/tmp/test这个文件夹
+ D.属组的成员用户一定可以进入/tmp/test这个文件夹
+19.
+(单选题)配置bind域名服务时，管理员执行了cp -p /var/named/named.localhost /var/named/tedu.cn.zone操作，
+其中选项-p的作用是（ B）
+ A.拷贝连接
+ B.保持原文件属性不变
+ C.拷贝目录
+ D.递归拷贝
+20.
+(单选题)在Linux系统中从源代码安装软件时，编译的过程由（B ）操作完成
+ A../configure
+ B.make
+ C.make all
+ D.make install
+21.
+(单选题)在Linux系统中，若要找出大小不少于20M的文件，可以执行（ D）
+ A.find / -max +20M
+ B.find / -size -20M
+ C.find / -max +20M
+ D.find / -size +20M
+22.
+(单选题)在Linux系统中，执行 tar -zcf bak.tar.gz /etc /boot 操作的作用
+是（B ）
+ A.压缩/etc/文件夹下的所有信息
+ B.备份/etc和/boot文件夹到bak.tar.gz
+ C.解压bak.tar.gz所有信息解压到/etc和/boot文件夹下
+ D.命令的语法有错
+23.
+(单选题)扩展逻辑卷的命令为(D )
+ A.lvcreate
+ B.vgcreate
+ C.vgextend
+ D.lvextend
+24.
+(单选题)计划任务的配置格式是（A）
+ A.分 时 日 月 周 任务命令行
+ B.日 月 周 分 时 任务命令行
+ C.时 分 日 月 周 任务命令行
+ D.周 月 日 时 分 任务命令行
+25.
+(单选题)在Linux系统中，以下（ D）不属于YUM软件仓库提供的方式
+ A.file://
+ B.ftp://
+ C.http://
+ D.mail://
+26.
+(单选题)当字符串用单引号括起来时，shell将（ C）
+ A.解释引号内的特殊字符串
+ B.执行引号中的命令
+ C.不解释引号内的特殊字符
+ D.结束进程
+27.
+(单选题)管理员若要为普通账户bob设置周期性计划任务，可以执行（C ）
+ A.crontab -r -u bob
+ B.crontab -l -u bob
+ C.crontab -e -u bob
+ D.crontab -e
+28.
+(单选题)查询samba用户的命令（C ）
+ A.pdbedit -a 用户名
+ B.id 用户名
+ C.pdbedit -L 用户名
+ D.pdbedit -x 用户名
+29.
+(单选题)Windows查看IP地址的命令为（B ）
+ A.ifconfig
+ B.ipconfig
+ C.ipconf
+ D.ifconf
+30.
+(单选题)在Linux系统中，MBR分区模式第四块SCSI硬盘中的第三个逻辑分区
+表示为（ D）
+ A./dev/hda3
+ B./dev/sdd3
+ C./dev/sdc7
+ D./dev/sdd7
+31.
+(单选题)在Linux系统中从源代码安装软件时，编译成功后执行安装的命令通常是
+（D）
+ A../configure
+ B.make
+ C.make all
+ D.make install
+32.
+(单选题)将逻辑卷/dev/vg_data/lv_data的容量增加10G的命令是（A ）
+ A.lvextend -L +10G /dev/vg_data/lv_data
+ B.lvextend -add +10G /dev/vg_data/lv_data
+ C.lvextend -max +10G /dev/vg_data/lv_data
+ D.vgextend -L +10G /dev/vg_data/lv_data
+33.
+(单选题)在Linux系统中yum仓库配置文件后缀名是（ C）
+ A..cfg
+ B..Conf
+ C..repo
+ D..rpm
+34.
+(单选题)在Linux系统中，若要在每个星期一凌晨两点执行cc命令，则crontab计
+划任务应该设置为（ D）
+ A.00 02 * * * cc
+ B.* * * 02 01 cc
+ C.02 00 * * * cc
+ D.00 02 * * 01 cc
+35.
+(单选题)配置NTP客户端服务的需要安装（ B）包
+ A.ntp
+ B.chrony
+ C.chronyd
+ D.chronyd.conf
+36.
+(单选题)使用vim编辑文件时，若要将第7到10行的内容一次性删除，可以在
+命令模式下先将光标移动到第7行，再使用（ B）按键命令
+ A.dd
+ B.4dd
+ C.de
+ D.4de
+37.
+(单选题)在Linux系统中，执行（ B）操作可以将/mail文件夹的属组设置为postfix
+ A.chmod postfix /mail
+ B.chown :postfix /mail
+ C.groupmod postfix /mail
+ D.chmod :postfix /mail
+38.
+(单选题)在Linux系统中，执行（B ）命令可以列出普通账户bob的周期性计划任务
+ A.crontab -r -u bob
+ B.crontab -l -u bob
+ C.crontab -e -u bob
+ D.crontab -e
+39.
+(单选题)在Linux系统中，使用命令rpm -e卸载软件包时，返回错误提示：
+“Failed dependencies”，这可能是由于（ C）
+ A.该软件包已不存在
+ B.该软件包已不存在
+ C.该软件包与其他软件包之间存在依赖关系
+ D.该软件包已损坏
+40.
+(单选题)在Linux系统中，若执行 scp dumb bilbo@www.foobar.com: 命令，
+可以实现（ D）功能
+ A.将本地计算机“dumb”目录下所有的文件拷贝到远程服务器 www.fobar.com的根目录下，并且登录远程服务器上的密码为“bilbo”
+ B.将本地计算机当前目录下的一个名为“dumb”的文件发送到邮件 bilbo@www.foobar.com
+ C.将远程服务器www.foobar.com 上用户“bilbo”主目录下的一个名为 “dumb”的文件拷贝到本地计算机当前目录下，并且登录远程服务器上的账号名为 “bilbo”
+ D.将本地计算机当前目录下的一个名为“dumb”的文档拷贝到远程主机www.fobar.com中用户 “bilbo”的主目录下
+41.
+(多选题)关于Linux命令行环境的通配符，以下描述正确的是（CD ）
+ A.* 匹配单个字符
+ B.？匹配任意多个字符
+ C.[a-z] 匹配连续多个字符a-z中的一个
+ D.{a,min,xy} 分别匹配不连续的a,min,xy多组字符
+42.
+(多选题)Linux典型的文件系统类型有（ BCD）
+ A.NTFS
+ B.ext4
+ C.swap
+ D.xfs
+43.
+(多选题)selinux的运行模式有（ ACD）
+ A.disable
+ B.enable
+ C.enforcing
+ D.permissive
+44.
+(多选题)在Linux系统中，用户root依次执行下列操作： 
+chmod 777 /dir；chmod o+t /dir；touch /dir/root.file ， 
+则可知（ AB）
+ A.普通账户可以在/dir目录下创建文件
+ B.普通账户可以删除在/dir目录下自己创建的文件
+ C.普通账户可以删除文件root.file
+ D.普通账户可删除/dir目录下的所有文件
+45.
+(多选题)在vim编辑器的（ CD）工作模式中可以实现保存退出的操作
+ A.修改模式
+ B.输入模式
+ C.命令模式
+ D.末行模式
+46.
+(多选题)规范shell的一般组成( ABC)
+ A.#!环境声明
+ B.#注释文本
+ C.可执行代码
+ D.if判断
+47.
+(多选题)在Linux系统中，执行（D B）命令可以查看网关记录
+ A.hostname
+ B.route –n
+ C.arp –n
+ D.route
+48.
+(多选题)安装源码包时需要安装编译工具有（ CD）
+ A.C++
+ B.g++
+ C.gcc
+ D.make
+49.
+(多选题)以下（ AD）属于Linux发行版本
+ A.Red Hat Enterprise Linux
+ B.IBM AIX
+ C.Windows Server 2008
+ D.CentOS
+50.
+(多选题)在Linux中配置LDAP需要安装那些软件包(BC )
+ A.sssh
+ B.sssd
+ C.authconfig-gtk
+ D.authconfig
+交卷
+关于我们 | 服务支持 | 咨询与反馈 | 最新动态 | 代理合作 | 名师堂
+达内时代科技集团有限公司 2013-2014
+中关村中心企业合作：62117598 UID中心企业合作：82168421、82168831

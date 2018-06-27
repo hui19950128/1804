@@ -1,0 +1,123 @@
+传输层的作用
+	网络层提供点到点的连接
+	传输层提供端到端的连接
+	
+	tcp(Transmission Control Protocol)
+		传输的协议
+		可靠的、面向连接的协议
+		传输效率低
+	UDP(User Datagram Protocol)
+		用户数据包协议
+		不可靠的、无连接的服务
+		传输效率高
+		
+	65536个端口 0-1023不用	被不知名企业占用
+	0-65535
+三次握手：
+	1. Host A： 发送 FIN,请求断开连接
+		(FIN=1,ACK=1)
+		
+	2. Host B： 发送 SYN 、ACK
+		(seq=300, ack=101,
+		ctl=SYN、ACK)
+
+	3. Host A： 发送ACK
+		(seq=101 ack=301
+		ctl=ACK)
+
+	21	FTP
+	23	Telnet
+	25	SMTP
+	53	DNS
+	80	HTTP
+	69	TFTP
+	123	NTP
+	
+UDP的流控和差错控制
+• UDP缺乏可靠机制
+• UDP只有校验和来提供差错控制
+– 需要上层协议来提供差错控制:例如TFTP协议
+
+访问控制列表
+	访问控制列表的类型
+		标准访问控制列表
+			基于源IP地址过滤数据包
+			标准访问控制列表访问控制列表号是1～99
+		扩展访问控制列表
+			基于源IP地址、目的IP地址、指定协议、端口来过滤数据包
+			扩展访问控制列表的访问控制列表号是100~199
+			{permit |deny} 
+	标准访问控制列表的配置
+		创建ACL
+			Router(config)#access-list access-list-number
+			{ permit | deny } source [ source-wildcard ]
+		应用实例
+			Router(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+			Router(config)# access-list 1 permit 192.168.2.2 0.0.0.0
+			Router(config-if)# ip access-group 1 in
+			允许192.168.1.0/24和主机192.168.2.2的流量通过
+			
+			Router(config)# access-list 101 deny tcp host 192.168.2.1 host 192.168.1.1 eq 21
+			Router(config)# access-list 101 deny tcp host 192.168.2.2 host 192.168.1.1 eq 80
+			Router(config)# access-list 101 permit ip any any
+			Router(config-if)# ip access-group 101 in
+			
+NAT概述
+	NAT
+		Network Address Translation,网络地址转换
+	作用
+		通过内部网络的私有IP地址翻译成全球唯一的公网IP地址，使用内部网络可以连接到互联网等外部网络上。
+		私有ip地址分类
+		A类 10.0.0.0~10.255.255.255
+		B类 172.16.0.0~172.31.255.255
+		C类 192.168.0.0~192.168.255.255
+	NAT的特性		
+	
+	NAT的优点
+		节省公有合法IP地址
+		处理地址重叠
+		安全性
+
+	NAT的特性(续1)
+		NAT的缺点
+		延迟增大
+		配置和维护的复杂性
+		spanning-tree vlan 1 pruority Bridge-priority
+
+	NAT实现方式
+		静态转换(Static Translation)
+		端口多路复用(Port Address Translation,PAT)
+		
+	静态转换
+		IP地址的对应关系是一对一，而且是不变的，借助静态转换，能实现外部网络对内部网络中某些特设定服务器的访问。
+	静态NAT的配置步骤
+		接口IP地址配置
+		决定需要转换的主机地址
+		决定采用什么公有地址
+		在内部和外部端口上启用NAT
+		Router(config)# ip nat inside source static local-ip global-ip
+		Router(config)# ip nat inside scoure static 192.168.1.1 100.0.0.2
+		Router(config-if)# in nat inside
+	PAT
+		端口多路复用
+			通过改变外出数据包的源IP地址和源端口并进行端口转换，内部网络的所有主机均可共享一个合法IP地址实现互联网的访问,节约IP。
+			PAT的配置
+		PAT配置步骤
+			接口IP地址配置
+			使用访问控制列表定义哪些内部主机能做PAT
+			确定路由器外部接口
+			在内部和外部端口上启用NAT
+			overload代表复用
+			
+开启DHCP功能
+	创建地址池并命名
+		Router(config)# ip dhcp pool xxx
+	分配网段
+		Router(dhcp-config)# network 192.168.1.0 255.255.255.0
+	分配网关地址
+		Router(dhcp-config)# default-router 192.168.1.254
+	配置dns服务器地址
+		Router(dhcp-config)# dns-server 8.8.8.8
+	地址排除（保留某些地址）
+		Router(config)# ip dhcp excluded-address 192.168.1.1 192.168.1.9
+	

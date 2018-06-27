@@ -1,0 +1,406 @@
+###！！！什么是计算机网络
+– 硬件方面:通过线缆将网络设备和计算机连接起来
+– 软件方面:操作系统,应用软件,应用程序通过通信，线路互连
+– 实现资源共享、信息传递
+###！！！计算机网络的功能
+• 数据通信
+• 资源共享
+• 增加可靠性
+• 提高系统处理能力
+###！！！计算机网络发展阶段
+• 60年代
+– 分组交换
+• 70-80年代
+– TCP/IP
+• 90代年后
+– Web技术
+###！！！网络标准
+• 标准化组织
+– ISO(国际标准化组织)
+– ANSI(美国国家标准化局)
+– ITU-T(国际电信联盟-电信标准部)
+– IEEE(电气和电子工程师学会)
+###！！！WAN和LAN
+广域网(Wide-Area Network)
+局域网(Local-Area Network)
+###！！！网络拓扑结构
+线缆连接计算机和网络设备的布局
+– 点对点
+	– 两台设备乊间有一条单独的连接
+	– 与用的广域网中电路连接的两台路由器
+– 星型及扩展的星型
+	– 优点
+	易于实现
+	易于网络扩展
+	易于故障排查
+	– 缺点
+	中心节点压力大
+	组网成本较高
+– 网状
+	– 一个节点不其他多个节点相连
+	– 提供冗余性和容错性
+	– 可靠性高
+	– 组网成本高
+###！！！OSI的七层框架
+应用层		网络服务不最终用户的一个接口				
+表示层		数据的表示、安全、压缩				
+会话层		建立、管理、中止会话
+传输层		定义传输数据的协议端口号,以及流控和差错校验
+网络层		进行逻辑地址寻址,实现丌同网络乊间的路径选择
+数据链路层	建立逻辑连接、进行硬件地址寻址、差错校验等功能
+物理层		建立、维护、断开物理连接
+###！！！TCP/IP协议族的组成
+应用层		HTTP，SMTP，FTP，TFTP，SNMP，DNS	上层数据		计算机
+传输层		TCP，UDP				上层数据	数据段	防火墙	
+网络层		ICMP，IGMP---IP---ARP RARP	上层数据	数据包	路由器
+数据链路层	由底层网络定义的协议			上层数据	数据帧 交换机
+物理层		由底层网络定义的协议					比特流	网卡
+###！！！以太网接口
+• RJ-45
+– RJ是描述公用电信网络的接口,常
+用的有RJ-11和RJ-45
+###！！！光纤接口
+– 用以稳定地但并丌是永久地连接两
+根或多根光纤的无源组件
+FC 囿形带螺纹光纤接头
+ST 卡接式囿形光纤接头
+SC 方型光纤接头
+LC 窄体方形光纤接头
+MT-RJ 收収一体的方型光纤接头
+###！！！双绞线
+类型 传输速率
+cat5		100Mbps
+cat5e		100Mbps
+cat6		1000Mbps(1Gbps)
+cat7 		10000Mbps(10Gbps)
+• T568A:白绿、绿、白橙、蓝、白蓝、橙、白棕、棕
+• T568B:白橙、橙、白绿、蓝、白蓝、绿、白棕、棕+++++
+###！！！路由器怎么工作
+• 主要完成下列事情
+– 识别数据包的目标IP地址
+– 识别数据包的源IP地址(主要用亍策略路由)
+– 在路由表中发现可能的路径
+– 选择路由表中到达目标最好的路径
+– 维护和检查路由信息
+• 根据路由表选择最佳路径
+– 每个路由器都维护着一张路由表,这是路由器转发数
+据包的关键
+– 每条路由表记录指明了:到达某个子网或主机应从路
+由器的哪个物理端口发送,通过此端口可到达该路径
+的下一个路由器的地址(或直接相连网络中的目标主
+机地址)
+• 静态、缺省路由
+– 由管理员在路由器上手工指定
+– 适合分支机构、家居办公等小型网络
+• 劢态路由
+– 根据网络拓扑或流量变化,由路由器通过路由协议自动设置
+– 适合ISP服务商、广域网、园区网等大型网络
+###！！！静态路由
+• 主要特点
+– 由管理员手工配置,为单向条目
+– 通信双方的边缘路由器都需要指定,否则会导致数据包有去无回
+###！！！什么是缺省路由?
+– 缺省路由是一种特殊的静态路由,对亍末梢网络的主机来说,也被称为“默认网关”
+– 缺省路由的目标网络为 0.0.0.0 0.0.0.0,可匹配任何目标地址
+– 只有当从路由表中找丌到任何明确匹配的路由条目时,才会使用缺省路由动态路由概述
+###！！！动态路由，ospf，默认路由
+– 基亍某种路由协议实现
+• 动态路由特点
+– 减少了管理任务
+– 占用了网络带宽
+• OSPF区域
+– 为了适应大型的网络,OSPF在网络内部划分多个区域
+– 每个OSPF路由器只维护所在区域的完整链路状态信息
+• 区域ID
+– 区域ID可以表示成一个十进制的数字
+– 也可以表示成一个IP
+• 骨干区域Area 0
+– 负责区域间路由信息传播
+###！！！传输层的协议
+• TCP(Transmission Control Protocol)
+– 传输控制协议
+– 可靠的、面向连接的协议
+– 传输效率低
+• UDP(User Datagram Protocol)
+– 用户数据报协议
+– 不可靠的、无连接的服务
+– 传输效率高
+###！！！TCP的连接与断开
+• TCP的连接-三次握手
+A发送SYN连接请求
+B发送 SYN连接请求、ACK连接确认
+A发送ACK连接确认	
+• TCP的四次断开		
+A发送FIN断开请求
+B发送ACK断开确认
+B发送FIN断开请求
+A发送ACK断开确认
+###！！！协议端口
+	21	FTP
+	23	Telnet
+	25	SMTP
+	53	DNS
+	80	HTTP
+	69	TFTP
+	123	NTP
+###！！！UDP的流控和差错控制
+• UDP缺乏可靠机制
+• UDP只有校验和来提供差错控制
+– 需要上层协议来提供差错控制:例如TFTP协议
+###！！！访问控制列表的工作原理
+• 访问控制列表在接口应用的方向
+– 出:已经过路由器的处理,正离开路由器接口的数据包
+– 入:已到达路由器接口的数据包,将被路由器处理
+访问控制列表的类型
+• 标准访问控制列表
+– 基于源IP地址过滤数据包
+– 标准访问控制列表的访问控制列表号是1~99
+• 扩展访问控制列表
+– 基于源IP地址、目的IP地址、指定协议、端口来过滤数据包
+– 扩展访问控制列表的访问控制列表号是100~199
+###！！！NAT作用
+• NAT
+– Network Address Translation,网络地址转换
+• 作用
+– 通过将内部网络的私有IP地址翻译成全球唯一的公网IP地址,使内部网络可以连接到互联网等外部网络上。
+###！！！私有ip地址分类
+• A类 10.0.0.0~10.255.255.255
+• B类 172.16.0.0~172.31.255.255
+• C类 192.168.0.0~192.168.255.255
+###！！！ NAT的优点
+– 节省公有合法IP地址
+– 处理地址重叠
+– 安全性
+NAT的缺点
+–延迟增大
+• NAT实现方式
+– 静态转换(Static Translation)
+– 端口多路复用(Port Address Translation,PAT)
+• 静态转换
+– IP地址的对应关系是一对一,而且是不变的,借助静态转换,能实现外部网络对内部网络中某些特设定服务器的访问。
+• 静态NAT配置步骤
+– 接口IP地址配置
+– 决定需要转换的主机地址
+– 决定采用什么公有地址
+– 在内部和外部端口上启用NAT
+• NAT端口映射配置
+Router(config)#ip nat inside source static tcp 192.168.1.6 80
+61.159.62.133 80
+• PAT(端口多路复用)
+– 通过改变外出数据包的源IP地址和源端口并进行端口转换,内部网络的所有主机均可共享一个合法IP地址实现互联网的访问,节约IP。
+广播风暴的产生
+• 交换机工作原理
+– 根据MAC地址表转发数据帧,如果地址未知,则广播
+– 如果交换机接收到广播帧也会向所有端口发送
+– 当网络中存在物理环路,会产生广播风暴
+• STP简介
+– STP - Spanning Tree Protocol(生成树协议)
+逻辑上断开环路,防止广播风暴的产生当线路故障,阻塞接口被激活,恢复通信,起备份线路的作用
+• 选择根网桥
+网桥ID(BID)
+– 网桥ID是唯一的,交换机之间选择BID值最小的交换机作为网络中的根网桥
+• PVST+配置的意义
+– 配置网络中比较稳定的交换机为根网桥
+– 利用PVST+实现网络的负载分担
+###！！！HSRP的相关概念
+• 热备份路由选择协议
+– HSRP(Hot Standby Routing Protocol)
+– Cisco私有协议
+• HSRP组成员
+– 活跃路由器
+– 备份路由器
+– 虚拟路由器
+– 其他路由器
+• HSRP端口跟踪
+– 跟踪端口不可用时,HSRP优先级降低
+– 活跃路由器可以根据线路情况自动调整
+• HSRP占先权
+– 优先级高的路由器重新获得转发权,恢复成为活跃路由器
+– HSRP占先权配置
+###！！！什么是协议?
+– 为了使数据可以在网络上从源传递到目的地,网络上所有设备需要“讲”相同的“语言”
+– 描述网络通信中“语言”规范的一组规则就是协议
+###！！！VLAN的作用
+– 广播控制
+– 安全性
+– 带宽利用
+– 延迟
+VLAN标识的种类
+• 以太网上实现中继可用两种封装类型
+– ISL(Cisco私有协议)
+– IEEE 802.1Q	4字节
+
+
+
+
+
+
+
+
+
+
+###！！！各种模式，查看命令
+Switch>				用户模式
+Switch#				特权模式（一般用于查看配置信息）
+Switch(config)#			全局配置模式（所做的配置对整个设备生效）
+Switch(config-if)#		接口模式
+Switch(config)# hostname S1	配置主机名
+Switch(config)#enable password Taren1	配置主机密码
+Switch#reload			重启
+Switch#show interfaces fastEthernet 0/1 switchport 	查看某个端口的配置模式
+Switch#show etherchannel summary查看一台通道设置
+三层交换机和路由配置ip时需打开端口（no shutdown）
+Switch(config)#ip routing  三层交换机打开路由功能
+###！！！配置控制台会话时间永不超时
+– Switch(config)#line console 0
+– Switch(config-line)#exec-timeout 0 0
+###！！！ 配置输出日志同步
+– Switch(config)#line console 0
+– Switch(config-line)#logging synchronous
+###！！！在特权模式输入错误命令会収起解析请求
+• 解决方法
+– 配置禁用DNS查询
+– switch(config)#no ip domain-lookup
+###############################################################
+###！！！清空设备配置
+Switch#erase startup-config
+提示
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]         //此时系统询问是否确定删除，按回车即可
+[OK]
+Switch(config)#vlan 10		创建vlane
+Switch(config)#no vlan 10	删除vlane
+###############################################################
+###！！！添加端口到vlane
+Switch(config)#interface fastethernet 0/1
+Switch(config-if)#switchport access vlan 20
+###############################################################
+###！！！删除vlane的端口
+Switch(config)#interface fastethernet 0/1
+Switch(config-if)#no switchport access vlan 20
+###！！！进入组端口模式
+Switch(config)#interface range fastEthernet 0/3-4
+###############################################################
+###！！！二级交换机trunk设置（多个vlane传输数据，可进入组端口模式设置）
+Switch(config)#interface fastEthernet 0/1	进入端口
+Switch(config-if)#switchport mode trunk 	设置trunk模式
+Switch(config-if)#no switchport mode trunk	删除trunk模式为默认
+###！！！三层交换机设置trunk需要封包
+Switch(config-if)#switchport trunk encapsulation dot1q 封包
+Switch(config-if)#switchport mode trunk 	设置trunk模式
+###############################################################
+###！！！设置以太通道（链路连接，以太端口捆绑、端口聚集或以太链路聚集，EtherChannel，增加带宽，能传输多个vlan数据，只能在交换机之间使用）
+Switch(config)#interface range fastEthernet 0/7-9
+Switch(config-if-range)#channel-group 1 mode on 
+###############################################################
+###！！！配置静态路由
+Router(config)#ip route 目标ip 子网掩码 下一跳		设置目标ip的下一跳（学习路由表）
+###！！！设置默认路由（只能在网络末端设置，连接两个及以上路由不能设置）
+Router(config)#ip route 0.0.0.0 0.0.0.0 下一跳
+###############################################################
+###！！！三层交换机单个端口设置ip
+Switch(config)#interface fastEthernet 0/23
+Switch(config-if)#no switchport
+Switch(config-if)#ip address 192.168.4.1 255.255.255.0
+###############################################################
+###！！！动态路由（创建ospf 序列号 添加直连ip）
+Switch(config)#router ospf 1
+Switch(config-router)#network 直连ip网段 反掩码 area 0
+###############################################################
+###！！！为路由（三层交换机）配置acl访问控制权限()
+Router(config)#access-list 列
+号 deny|permint 限制主机的ip 反掩码 
+或
+Router(config)#access-list 1 deny host 192.168.2.1
+###！！！在接口中应用acl权限（1-99）
+Router(config)#interface gigabitEthernet 0/1
+Router(config-if)#ip access-group 1 进口|出口
+###！！！设置路由acl 端口 权限（100-199）
+Router(config)#access-list 100 deny|permint tcp|udp host 192.168.2.1 host 192.168.1.1 eq 端口
+Router(config)#access-list 100 permit ip any any 允许所有
+###############################################################
+###！！！开启DHCP功能
+创建地址池并命名
+	Router(config)# ip dhcp pool xxx
+分配网段
+	Router(dhcp-config)# network 192.168.1.0 255.255.255.0
+分配网关地址
+	Router(dhcp-config)# default-router 192.168.1.254
+配置dns服务器地址
+	Router(dhcp-config)# dns-server 8.8.8.8
+地址排除（保留某些地址）
+	Router(config)# ip dhcp excluded-address 192.168.1.1 192.168.1.9
+##############################################################
+###！！！静态nat转换，只能绑定一个端口
+Router(config)#ip nat inside source static 私网ip 合法ip
+在路由内部和外部端口上启用NAT
+Router(config)#interface 出口
+Router(config-if)#ip nat outside
+Router(config)#interface 入口
+Router(config-if)#ip nat inside
+###！！！端口复用
+使用acl定义内部ip地址
+Router(config)#access-list 1 permit 内部网段 反掩码
+使用pat复用外网接口地址
+Router(config)#ip nat inside source list 1 interface 连接外网端口 overload
+###############################################################
+###！！！STP生成树算法
+#spanning-tree vlan vlan-list	启用生成树命令
+#spanning-tree vlan vlan-list root { primary主
+| secondary次 }	指定根网桥
+#spanning-tree vlan vlan-list priority
+Bridge-priority	指定根网桥
+#show spanning-tree	查看生成树的配置
+#show spanning-tree vlan vlan-id	查看某个vlan的生成树详细信息
+默认32768
+4096的倍数
+BLK阻断
+FWD转发
+###############################################################
+###！！！standby热备份虚拟网关（HSRP）
+standby 数字 ip 网关
+在两台三层交换机中开启热备份功能，使用192.168.1.254作为虚拟路由器的地址，并由MS1承担活跃路由器，先设置vlan1，2的真实地址，再进入vlan端口设置绑定standby的虚拟的虚拟地址
+Switch(config)#interface vlan 1		进入vlan
+Switch(config-if)#standby 1 ip 虚拟地址	绑定虚拟地址
+Switch(config-if)#standby 1 priority 105	设置standby的优先级（越大优先，连接根相反）
+Switch(config-if)#standby 1 preempt		设置抢占优先权
+###！！！为三层交换机设置端口跟踪
+Switch(config)#interface vlan 1
+Switch(config-if)#standby 1 track fastEthernet 0/1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

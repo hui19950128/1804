@@ -1,0 +1,218 @@
+案例练习,准备:
+            rht-vmctl  reset  classroom
+            rht-vmctl  reset  server
+	        rht-vmctl  reset  desktop
+######################################################
+
+案例1:为虚拟机 server 配置以下永久的静态地址参数
+– 主机名:server0.example.com
+– IP地址:172.25.0.11
+– 子网掩码:255.255.255.0
+– 默认网关:172.25.0.254
+– DNS服务器:172.25.254.254
+
+[root@localhost ~]# nmcli connection modify 'System eth0' ipv4.method manual ipv4.addresses '172.25.0.11/24 172.25.0.254' ipv4.dns 172.25.254.254 connection.autoconnect yes
+[root@localhost ~]# nmcli connection up 'System eth0'
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/1)
+
+
+案例2：复制、粘贴、移动
+ 以root用户新建/example/目录，在此目录下新建nsd.txt文件，并进一步完成下列操作
+
+[root@localhost ~]# mkdir /example
+[root@localhost ~]# cd /example;touch nsd.txt
+
+ 1）将“I love Study”写入到文件nsd.txt 
+ 
+ [root@localhost example]# echo I Love Study > nsd.txt
+
+ 2）将nsd.txt重命名为mylove.txt
+ 
+  [root@localhost example]# mv nsd.txt mylove.txt
+ 
+ 3）将/etc/passwd、/boot、/etc/group同时拷贝到/example/目录下
+ 
+ [root@localhost /]# cp -r /etc/passwd /boot /etc/group /example
+
+ 4）将ifconfig命令的前两行内容，追加写入mylove.txt
+ 
+ [root@localhost /]# ifconfig | head -2 >> /example/mylove.txt
+
+ 5）将主机名永久配置文件，拷贝到/example/目录下
+ 
+ [root@localhost /]# cp /etc/hostname /example
+
+ 6）将DNS永久配置文件，拷贝到/example/目录下
+ 
+ [root@localhost /]# cp /etc/resolv.conf /example
+
+ 7）将开机自动挂载配置文件，拷贝到/example/目录下
+
+[root@localhost /]# cp /etc/fstab /example
+
+	
+
+
+案例3:在server上操作,（MBR分区模式）规划分区
+ 添加一块80G的硬盘并规划分区：
+   划分2个10G的主分区；1个12G的主分区;1个20G的逻辑分区。
+   
+在虚拟机管理器关闭虚拟机server0，并点击灯泡（虚拟机详情）--点击左下角添加硬件--输入
+硬盘容量80.0 Gib--点击完成--开启虚拟机
+   
+
+[root@server0 ~]# lsblk
+先用命令查询硬盘，确定新磁盘为vbc路径为/dev/vbc
+[root@server0 ~]# fdisk /dev/vdc
+
+3个主分区：
+　　　Device does not contain a recognized partition table
+　　　使用磁盘标识符 0xfd162e1b 创建新的 DOS 磁盘标签。
+　　　
+　　　命令(输入 m 获取帮助)：n ///////输入n新建磁盘
+　　　Partition type:
+　　　   p   primary (0 primary, 0 extended, 4 free)
+　　　   e   extended
+　　　Select (default p):  ////////此处回车默认为
+　　　p
+　　　分区号 (1-4，默认 1)：///////此处可回车
+　　　起始 扇区 (2048-167772159，默认为 2048)：//////输入回车默认数值
+　　　Last 扇区, +扇区 or +size{K,M,G} (204
+　　　8-167772159，默认为 167772159)：+10G //////此处第一个和第二个分区输入+10G 第三个输入+12G
+　　　
+扩展分区和逻辑分区:
+
+键入n创建分区
+Partition type:
+   p   primary (3 primary, 0 extended, 1 free)
+   e   extended
+Select (default e): e //////此处选择e为扩展分区
+一路回车....将剩余所有容量分配给扩展分区
+分区 4 已设置为 Extended 类型，大小设为 48 GiB
+命令(输入 m 获取帮助)：n //////继续在此处输入n创建新分区
+添加逻辑分区 5
+起始 扇区 (67112960-167772159，默认为 67112960)：//////此处回车
+将使用默认值 67112960
+Last 扇区, +扇区 or +size{K,M,G} (67112960-167772159，默认为 167772159)：+20G //////输入+20G并回车
+[root@server0 ~]# partprobe //////刷新磁盘分区
+
+
+
+案例4:在server上操作,分区使用
+
+1、案例3中新添加80G硬盘的第一个逻辑分区
+– 格式化成xfs文件系统，实现该分区开机自动挂载，挂载点为/mnt/xfs
+
+[root@server0 ~]# mkfs.xfs /dev/vdc5
+[root@server0 ~]# mkdir /mnt/xfs
+[root@server0 ~]# vim /etc/fstab
+键入o进入编辑模式在文档末行添加
+　　　/dev/vdc5 /mnt/xfs xfs defaults 0 0
+　　　
+保存退出Esc -- :wq
+[root@server0 ~]# mount -a
+[root@server0 ~]# partprobe
+
+
+2、案例3中新添加80G硬盘的第一个主分区
+– 完成开机自动挂载，挂载点/mnt/mypart,文件系统为ext4
+
+[root@server0 ~]# mkfs.ext4 /dev/vdc1
+[root@server0 ~]# mkdir /mnt/mypart
+[root@server0 ~]# vim /etc/fstab
+键入o进入编辑模式在文档末行添加
+
+　　　/dev/vdc1 /mnt/mypart ext4 defaults 0 0
+[root@server0 ~]# mount -a
+
+
+案例5:虚拟机 server0操作，构建 LVM 存储
+
+– 新建一个名为 systemvg 的卷组 
+
+[root@server0 ~]# vgcreate systemvg /dev/vdc2
+
+– 在此卷组中创建一个名为 vo 的逻辑卷，大小为8G 
+
+– 将逻辑卷 vo 格式化为 xfs 文件系统 
+– 将逻辑卷 vo 挂载到 /vo 目录，并在此目录下建立一个测试文件 votest.txt，内容为“I AM KING.” 
+– 实现逻辑卷vo开机自动挂载到/vo
+
+
+[root@server0 ~]# lvcreate -L 8G -n vo systemvg
+  Logical volume "vo" created
+[root@server0 ~]# mkfs.xfs /dev/systemvg/vo
+[root@server0 ~]# mkdir /vo
+[root@server0 ~]# mount /dev/systemvg/vo /vo
+[root@server0 ~]# mount -a
+[root@server0 ~]# echo I AM KING > /vo/votest.txt
+[root@server0 ~]# vim /etc/fstab
+　　　末行添加
+　　　/dev/systemvg/vo /vo xfs defaults 0 0
+[root@server0 ~]# mount -a
+
+
+案例6:虚拟机 server0操作，构建 LVM 存储(修改PE大小)
+– 新的逻辑卷命名为 database，其大小为50个PE的大小，属于 datastore 卷组 
+– 在 datastore 卷组中其PE的大小为1M
+– 使用 EXT4 文件系统对逻辑卷 database 格式化，此逻辑卷应该在开机时自动挂载到 /mnt/database 目录
+
+[root@server0 ~]# vgcreate datastore /dev/vdc3
+  Volume group "datastore" successfully created
+[root@server0 ~]# lvcreate -l 50 -n database datastore
+[root@server0 ~]# vgchange -s 1M datastore
+[root@server0 ~]# mkfs.ext4 /dev/datastore/database
+[root@server0 ~]# mkdir /mnt/database
+[root@server0 ~]# vim /etc/fstab
+[root@server0 ~]# mount -a
+
+
+案例7:虚拟机 server0操作，扩展逻辑卷
+
+– 将/dev/systemvg/vo逻辑卷的大小扩展到20G
+
+Fdisk 创建新的逻辑分区
+[root@server0 ~]# partprobe
+[root@server0 ~]# vgextend systemvg /dev/vdc6
+[root@server0 ~]# lvextend -L 20G /dev/systemvg/vo
+[root@server0 ~]# xfs_growfs /dev/systemvg/vo
+
+案例8: vim文本编辑器练习，命令模式下的基本操作（重点知识）
+systemvg
+ 1）将/etc/passwd的前20行，写入到文件/opt/pass20.txt 
+ 2）将/etc/shadow的前10行,追加写入到文件/opt/pass20.txt 
+
+ 2）利用/opt/pass20.txt，进项如下操作：
+    – 命令模式下移动光标：键盘上下左右键、Home键、End键
+    – 命令模式下行间跳转：到全文的第一行（1G或gg）、到全文的最后一行（G）、到全文的第10行（10G）
+    
+    – 命令模式下复制、粘贴：
+    	 复制1行（yy）、复制3行（3yy）systemvg
+    	 粘贴到当前行之后（小写p）
+
+    – 命令模式下删除：
+    	 删除单个字符（x）
+    	 删除到行首（d^）、删除到行尾（d$）
+    	 删除1行（dd）、删除3行（3dd）
+         
+    
+    – 命令模式下查找关键词： 
+    	 搜索（/word）切换结果（n、N）
+
+    – 补充：在命令模式下大写的C，可以删除光标之后，并且进入输入模式
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
